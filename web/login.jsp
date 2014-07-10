@@ -1,10 +1,11 @@
 <%-- 
-    Document   : bookingstep1
-    Created on : Jul 9, 2014, 1:53:53 PM
+    Document   : register
+    Created on : Jul 9, 2014, 10:20:02 PM
     Author     : Doll
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
 <html>
     <head>
         <meta charset="utf-8">
@@ -87,81 +88,35 @@
                     <nav role="navigation" class="breadcrumbs clearfix">
                         <!--crumbs-->
                         <ul class="crumbs">
-                            <li><a href="#" title="Home">Home</a></li>
-                            <li><a href="#" title="Hotels">Hotels</a></li>
-                            <li><a href="#" title="United Kingdom">United Kingdom</a></li>
-                            <li><a href="#" title="London">London</a></li>  
-                            <li>Best ipsum hotel</li>                                       
+                            <li><a href="East2West" title="Home">Home</a></li>
+                            <li>Login</li>                                   
                         </ul>
                         <!--//crumbs-->
-
-                        <!--top right navigation-->
-                        <ul class="top-right-nav">
-                            <li><a href="#" title="Back to results">Back to results</a></li>
-                            <li class="last"><a href="#" title="Change search">Change search</a></li>
-                        </ul>
-                        <!--//top right navigation-->
                     </nav>
                     <!--//breadcrumbs-->
-
                     <!--three-fourth content-->
-                    <section class="three-fourth">
-                        <form id="booking" method="post" action="booking-step2.html" class="booking">
+                    <section class="three-fourth" >
+                        <form method="post" action="login" class="booking">
                             <fieldset>
-                                <h3><span>01 </span>Traveller info</h3>
-                                <div class="row twins">
-                                    <div class="f-item active">
-                                        <label for="first_name">First name</label>
-                                        <input type="text" id="first_name" name="first_name">
-                                    </div>
-                                    <div class="f-item last">
-                                        <label for="last_name">Last name</label>
-                                        <input type="text" id="last_name" name="last_name">
-                                    </div>
-                                </div>
-
-                                <div class="row twins">
+                                <h3><span>Login </span></h3>
+                                <p style="color: green"><s:property value="msg" /></p>
+                                <div class="row twins" style="margin-left: 30%">
                                     <div class="f-item">
                                         <label for="email">Email address</label>
-                                        <input type="email" id="email" name="email">
+                                        <input type="email" id="email" name="email" required="true" />
                                     </div>
-                                    <div class="f-item">
-                                        <label for="confirm_email">Confirm email address</label>
-                                        <input type="text" id="confirm_email" name="confirm_email">
-                                    </div>
-                                    <span class="info">You’ll receive a confirmation email</span>
                                 </div>
+                                <div class="row twins" style="margin-left: 30%">
+                                    <div class="f-item">
+                                        <label for="password">Password</label>
+                                        <input type="password" id="password" name="password"  required="true" />
+                                    </div>
+                                </div>
+                                <div style="margin-left: 30%;margin-top: 10px">
+                                    <input type="checkbox" /> <p>&nbsp;&nbsp;&nbsp; Remember me next time. </p>
+                                </div>
+                                <input type="submit" class="gradient-button" value="LOGIN" style="margin-left: 38%"/>
 
-                                <div class="row twins">
-                                    <div class="f-item">
-                                        <label for="address">Street Address an Number</label>
-                                        <input type="text" id="address" name="address">
-                                    </div>
-                                    <div class="f-item last">
-                                        <label for="city">Town / City</label>
-                                        <input type="text" id="city" name="city">
-                                    </div>
-                                </div>
-
-                                <div class="row twins">
-                                    <div class="f-item">
-                                        <label for="zip">ZIP Code</label>
-                                        <input type="text" id="zip" name="zip">
-                                    </div>
-                                    <div class="f-item last">
-                                        <label for="country">Country</label>
-                                        <input type="text" id="country" name="country">
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="f-item">
-                                        <label>Special requirements: <span>(Not Guaranteed)</span></label>
-                                        <textarea rows="10" cols="10"></textarea>
-                                    </div>
-                                    <span class="info">Please write your requests in English.</span>
-                                </div>
-                                <input type="submit" class="gradient-button" value="Proceed to next step" id="next-step">
                             </fieldset>
                         </form>
                     </section>

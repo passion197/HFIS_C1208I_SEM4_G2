@@ -17,5 +17,13 @@
         <action name="cardetail" class="controler.CarDetail">
             <result name="success">cardetail.jsp</result>
         </action>
+        <action name="register" class="controler.Register">
+            <result name="success">login.jsp</result>
+            <result name="error">register.jsp</result>
+        </action>
+        <action name="login" class="controler.Login">
+            <result name="success">East2West</result>
+            <result name="error">login.jsp</result>
+        </action>
     </package>
 </struts>
