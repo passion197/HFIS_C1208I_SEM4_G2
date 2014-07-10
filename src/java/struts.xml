@@ -28,5 +28,8 @@
         <action name="logout" class="controler.Logout">
             <result name="success" type="redirect">EWindex</result>
         </action>
+        <action name="bookingstep1" class="controler.BookingStep1">
+            <result name="success">bookingstep1.jsp</result>
+        </action>
     </package>
 </struts>

@@ -99,7 +99,7 @@
                                     <p class="teaser" style="border-bottom:1px dotted #dcdcdc">Tour Depart: <s:property value="tourDepart" /> .</p>
                                     
                                     <p class="teaser"> <s:property value="Descriptions" /> </p>
-                                    <center><a href="bookingstep1.jsp" title="Order Tour" class="gradient-button">BOOKING NOW</a></center>
+                                    <center><a href="bookingstep1?tourID=<s:property value="tourID" />" title="Order Tour" class="gradient-button">BOOKING NOW</a></center>
                                 </article>
                             </section>
                             <!--//General information-->

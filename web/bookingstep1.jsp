@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
 <html>
     <head>
         <meta charset="utf-8">
@@ -36,7 +37,7 @@
                 <!--logo-->
                 <h1 class="logo"><a href="EWindex" title="Book Your Travel - home"><img src="images/txt/logo.png" alt="Book Your Travel" /></a></h1>
                 <!--//logo-->
-                 <%@include file="displayacc.jsp" %>
+                <%@include file="displayacc.jsp" %>
                 <!--search-->
                 <div class="search">
                     <form id="search-form" method="get" action="search-form">
@@ -66,79 +67,74 @@
                         <!--crumbs-->
                         <ul class="crumbs">
                             <li><a href="#" title="Home">Home</a></li>
-                            <li><a href="#" title="Hotels">Hotels</a></li>
-                            <li><a href="#" title="United Kingdom">United Kingdom</a></li>
-                            <li><a href="#" title="London">London</a></li>  
-                            <li>Best ipsum hotel</li>                                       
+                            <li><a href="#" title="Hotels">Tour info</a></li>  
+                            <li>Booking Tour</li>      
                         </ul>
                         <!--//crumbs-->
-
-                        <!--top right navigation-->
-                        <ul class="top-right-nav">
-                            <li><a href="#" title="Back to results">Back to results</a></li>
-                            <li class="last"><a href="#" title="Change search">Change search</a></li>
-                        </ul>
-                        <!--//top right navigation-->
                     </nav>
                     <!--//breadcrumbs-->
 
                     <!--three-fourth content-->
+
                     <section class="three-fourth">
                         <form id="booking" method="post" action="booking-step2.html" class="booking">
                             <fieldset>
-                                <h3><span>01 </span>Traveller info</h3>
+                                <h3>Step <span style="margin-right: 25%">01/03 </span> Traveller info</h3>
                                 <div class="row twins">
-                                    <div class="f-item active">
-                                        <label for="first_name">First name</label>
-                                        <input type="text" id="first_name" name="first_name">
-                                    </div>
-                                    <div class="f-item last">
-                                        <label for="last_name">Last name</label>
-                                        <input type="text" id="last_name" name="last_name">
-                                    </div>
-                                </div>
+                                    <s:iterator value="listTour" var="a">
+                                        <div class="f-item">
+                                            <label>Tour Name: <span style="font-size: 14px;font-weight: bold"><s:property value="tourName" /></span></label>
+                                            <label>Tour Depart: <span style="font-size: 14px;font-weight: bold"><s:property value="tourDepart" /></span></label>
+                                            <label>Tour Duration: <span style="font-size: 14px;font-weight: bold"><s:property value="Dates" /></span></label>
+                                            <label>Seat Available: <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="seatAvailable" /></span></label>
+                                            <label>Price Adults: <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="costAdults" /> $</span></label>
+                                            <label>Price Child: <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="costChild" /> $</span></label>
 
-                                <div class="row twins">
-                                    <div class="f-item">
-                                        <label for="email">Email address</label>
-                                        <input type="email" id="email" name="email">
-                                    </div>
-                                    <div class="f-item">
-                                        <label for="confirm_email">Confirm email address</label>
-                                        <input type="text" id="confirm_email" name="confirm_email">
-                                    </div>
-                                    <span class="info">You’ll receive a confirmation email</span>
-                                </div>
+                                            <p></p>
+                                        </div>
 
-                                <div class="row twins">
-                                    <div class="f-item">
-                                        <label for="address">Street Address an Number</label>
-                                        <input type="text" id="address" name="address">
-                                    </div>
-                                    <div class="f-item last">
-                                        <label for="city">Town / City</label>
-                                        <input type="text" id="city" name="city">
-                                    </div>
-                                </div>
+                                        <figure style="float: right"><img style="width: 300px;height: 150px" src="images/uploads/<s:property value="img" />" /></figure> 
 
-                                <div class="row twins">
-                                    <div class="f-item">
-                                        <label for="zip">ZIP Code</label>
-                                        <input type="text" id="zip" name="zip">
-                                    </div>
-                                    <div class="f-item last">
-                                        <label for="country">Country</label>
-                                        <input type="text" id="country" name="country">
-                                    </div>
+                                    </s:iterator>
                                 </div>
+                                <s:iterator value="listUserInfo" var="b">
+                                    <div class="row twins">
+                                        <div class="f-item active">
+                                            <label for="first_name">First name</label>
+                                            <input type="text" id="first_name" name="first_name" value="<s:property value="firstName" />" required="true" maxlength="20"/>
+                                        </div>
+                                        <div class="f-item last">
+                                            <label for="last_name">Last name</label>
+                                            <input type="text" id="last_name" name="last_name" value="<s:property value="lastName" />" required="true" maxlength="20" />
+                                        </div>
+                                    </div>
 
-                                <div class="row">
-                                    <div class="f-item">
-                                        <label>Special requirements: <span>(Not Guaranteed)</span></label>
-                                        <textarea rows="10" cols="10"></textarea>
+                                    <div class="row twins">
+                                        <div class="f-item">
+                                            <label for="tel">Telephone</label>
+                                            <input type="text" id="tel" name="tel" value="<s:property value="tel" />" required="true" maxlength="15" />
+                                        </div>
+                                        <div class="f-item">
+                                            <label for="email">Email address</label>
+                                            <input type="email" id="email" name="email" value="<s:property value="email" />" required="true" maxlength="50" />
+                                        </div>
+                                        <span class="info">You’ll receive a confirmation email</span>
                                     </div>
-                                    <span class="info">Please write your requests in English.</span>
-                                </div>
+
+                                    <div class="row twins">
+                                        <div class="f-item">
+                                            <label for="address">Address</label>
+                                            <input type="text" id="address" name="address" value="<s:property value="address" />" required="true" maxlength="100" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="f-item">
+                                            <label>Special requirements: <span>(Not Guaranteed)</span></label>
+                                            <textarea rows="10" cols="10"></textarea>
+                                        </div>
+                                        <span class="info">Please write your requests in English.</span>
+                                    </div>
+                                </s:iterator>
                                 <input type="submit" class="gradient-button" value="Proceed to next step" id="next-step">
                             </fieldset>
                         </form>
