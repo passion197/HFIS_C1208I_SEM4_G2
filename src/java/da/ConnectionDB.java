@@ -25,7 +25,7 @@ public class ConnectionDB {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:56190;databaseName=East2West";
             con = DriverManager.getConnection(url, "sa", "123456");
-            System.out.println("Connection Successful!");
+        
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

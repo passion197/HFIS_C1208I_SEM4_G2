@@ -43,7 +43,6 @@ public class CarDetail extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
-        System.out.println("Ngu kinh");
         String sql = "select*from Car where CarID =?";
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setString(1, carID);
