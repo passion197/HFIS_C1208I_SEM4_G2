@@ -19,7 +19,7 @@
                     if (session.getAttribute("user") != null) {
                         String user = session.getAttribute("user").toString();
                         if (user != null) {
-                            out.print("<li>" + user + "</li>");
+                            out.print("<li>Hello " + user + "!</li>");
                             out.print("<li><a href='logout'>LOGOUT</a></li>");
                         }
                     } else {

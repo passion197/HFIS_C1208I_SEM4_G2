@@ -25,5 +25,8 @@
             <result name="success" type="redirect">EWindex</result>
             <result name="error">login.jsp</result>
         </action>
+        <action name="logout" class="controler.Logout">
+            <result name="success" type="redirect">EWindex</result>
+        </action>
     </package>
 </struts>

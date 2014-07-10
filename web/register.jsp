@@ -82,42 +82,42 @@
                                 <div class="row twins">
                                     <div class="f-item active">
                                         <label for="first_name">First name</label>
-                                        <input type="text" id="first_name" name="first_name"  required="true" >
+                                        <input type="text" id="first_name" name="first_name"  required="true" maxlength="20" />
                                     </div>
                                     <div class="f-item last">
                                         <label for="last_name">Last name</label>
-                                        <input type="text" id="last_name" name="last_name"  required="true" />
+                                        <input type="text" id="last_name" name="last_name"  required="true" maxlength="20" />
                                     </div>
                                 </div>
 
                                 <div class="row twins">
                                     <div class="f-item">
                                         <label for="email">Email address</label>
-                                        <input type="email" id="email" name="email" required="true" />
+                                        <input type="email" id="email" name="email" required="true" maxlength="50"/>
                                     </div>
                                     <div class="f-item">
                                         <label for="confirm_email">Confirm email address</label>
-                                        <input type="email" id="confirm_email" name="confirm_email"  required="true" />
+                                        <input type="email" id="confirm_email" name="confirm_email"  required="true" maxlength="50"/>
                                     </div>
                                 </div>
                                 <div class="row twins">
                                     <div class="f-item">
                                         <label for="password">Password</label>
-                                        <input type="text" id="address" name="password"  required="true" />
+                                        <input type="password" id="address" name="password"  required="true" maxlength="20"/>
                                     </div>
                                     <div class="f-item">
                                         <label for="confirm_password">Confirm Password</label>
-                                        <input type="text" id="confirm_password" name="confirm_password"  required="true" />
+                                        <input type="password" id="confirm_password" name="confirm_password"  required="true" maxlength="20"/>
                                     </div>
                                 </div>
                                 <div class="row twins" style="margin-bottom: 15px">
                                     <div class="f-item">
                                         <label for="tel">Telephone</label>
-                                        <input type="text" id="tel" name="tel"  required="true" />
+                                        <input type="text" id="tel" name="tel"  required="true" maxlength="15"/>
                                     </div>
                                     <div class="f-item">
                                         <label for="address">Address</label>
-                                        <input type="text" id="address" name="address"  required="true" />
+                                        <input type="text" id="address" name="address"  required="true" maxlength="100"/>
                                     </div>
                                 </div>
                                 <input type="checkbox" required="true"/><p>&nbsp;&nbsp; &nbsp;&nbsp;  By clicking you confirm that you accept the Terms of Service and Privacy Policy.</p>
