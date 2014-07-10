@@ -5,6 +5,7 @@
  */
 package controler;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,20 +48,24 @@ public class Login extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
-        String sql = "select count(*) as c from Users where Email=? and Pasword=?";
+        String sql = "select *from Users where Email=? and Pasword=?";
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setString(1, email);
         pst.setString(2, password);
         ResultSet rs = pst.executeQuery();
-        String test = "";
+        String name = "";
+        String userID=null;
         while (rs.next()) {
-            test = rs.getString("c");
+            name = rs.getString("FirstName");
+            userID=rs.getString("UserID");
         }
-        if (test.equals("1")) {
-            
-            return SUCCESS;
-        } else {
+        if (name.equals("")) {
+            msg="LOGIN failed! Please check Email or Password again !";
             return ERROR;
+        } else {
+            ActionContext.getContext().getSession().put("userID", userID);
+            ActionContext.getContext().getSession().put("user", name);
+            return SUCCESS;
         }
 
     }

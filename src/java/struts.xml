@@ -22,7 +22,7 @@
             <result name="error">register.jsp</result>
         </action>
         <action name="login" class="controler.Login">
-            <result name="success">East2West</result>
+            <result name="success" type="redirect">EWindex</result>
             <result name="error">login.jsp</result>
         </action>
     </package>

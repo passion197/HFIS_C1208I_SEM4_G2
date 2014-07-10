@@ -20,8 +20,8 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen,projection,print" />
         <link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" />
         <link rel="shortcut icon" href="images/favicon.ico" />
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
         <script type="text/javascript" src="js/css3-mediaqueries.js"></script>
         <script type="text/javascript" src="js/sequence.jquery-min.js"></script>
         <script type="text/javascript" src="js/jquery.uniform.min.js"></script>
@@ -46,29 +46,7 @@
                 <h1 class="logo"><a href="EWindex" title="Book Your Travel - home"><img src="images/txt/logo.png" alt="Book Your Travel" /></a></h1>
                 <!--//logo-->
 
-                <!--ribbon-->
-                <div class="ribbon">
-                    <nav>
-                        <ul class="profile-nav">
-                            <li class="active"><a href="#" title="My Account">My Account</a></li>
-                            <li><a href="login.html" title="Login">Login</a></li>
-                            <li><a href="my_account.html" title="Settings">Settings</a></li>
-                        </ul>
-                        <ul class="lang-nav">
-                            <li class="active"><a href="#" title="English (US)">English (US)</a></li>
-                            <li><a href="#" title="English (UK)">English (UK)</a></li>
-                            <li><a href="#" title="Deutsch">Deutsch</a></li>
-                            <li><a href="#" title="Italiano">Italiano</a></li>
-                            <li><a href="#" title="Русский">Русский</a></li>
-                        </ul>
-                        <ul class="currency-nav">
-                            <li class="active"><a href="#" title="$US Dollar">$US Dollar</a></li>
-                            <li><a href="#" title="€ Euro">€ Euro</a></li>
-                            <li><a href="#" title="£ Pound">£ Pound</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <!--//ribbon-->
+                <%@include file="displayacc.jsp" %>
 
                 <!--search-->
                 <div class="search">
