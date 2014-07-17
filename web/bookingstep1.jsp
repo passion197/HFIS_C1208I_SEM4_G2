@@ -23,11 +23,20 @@
         <script type="text/javascript" src="js/selectnav.js"></script>
         <script type="text/javascript" src="js/scripts.js"></script>
         <script>
-            window.onload = function showLogin() {
-                document.getElementById('logins').onclick = function() {
-                    document.getElementById('loginform').style.display = 'block';
-                };
-            };
+            $(document).ready(function() {
+                $("#total").change(function() {
+                    var num = $(this).val();
+                    var current = $(".fullname").length;
+                    if (num >= current) {
+                        for (i = current + 1; i <= num; i++) {
+                            $("#fullname").after("<p></p><input type='text' class='fullname' name='fullname" + i + "'></input>");
+                            $("#gender").after("<p></p><div class='selector' id='uniform-undefined'><select name='gender"+i+"' id='gender' class='gender'><option value='male'>Male</option><option value='female'>Female</option></select></div>");
+                            $("#type").after("<p></p><div class='selector' id='uniform-undefined'><select name='type"+i+"' id='type' class='type'><option value='adults'>Adults</option><option value='child'>Child</option></select></div>");
+                            $("#passport").after("<p></p> <input name='passport"+i+"' class='' id='' type='number' required='true' />");
+                        }
+                    }
+                });
+            });
         </script>
     </head>
     <body>
@@ -77,7 +86,7 @@
                     <!--three-fourth content-->
 
                     <section class="three-fourth">
-                        <form id="booking" method="post" action="booking-step2.html" class="booking">
+                        <form id="booking" method="get" action="#" class="booking">
                             <fieldset>
                                 <h3>Step <span style="margin-right: 25%">01/03 </span> Traveller info</h3>
                                 <div class="row twins">
@@ -89,15 +98,14 @@
                                             <label>Seat Available: <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="seatAvailable" /></span></label>
                                             <label>Price Adults: <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="costAdults" /> $</span></label>
                                             <label>Price Child: <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="costChild" /> $</span></label>
-
                                             <p></p>
                                         </div>
-
                                         <figure style="float: right"><img style="width: 300px;height: 150px" src="images/uploads/<s:property value="img" />" /></figure> 
-
                                     </s:iterator>
                                 </div>
                                 <s:iterator value="listUserInfo" var="b">
+
+                                    <h3>You can edit your information to true</h3>
                                     <div class="row twins">
                                         <div class="f-item active">
                                             <label for="first_name">First name</label>
@@ -127,14 +135,46 @@
                                             <input type="text" id="address" name="address" value="<s:property value="address" />" required="true" maxlength="100" />
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="f-item">
-                                            <label>Special requirements: <span>(Not Guaranteed)</span></label>
-                                            <textarea rows="10" cols="10"></textarea>
-                                        </div>
-                                        <span class="info">Please write your requests in English.</span>
-                                    </div>
                                 </s:iterator>
+                                <h3>List of Traveler in the Tour</h3>
+                                <div class="row twins">
+                                    <div class="f-item">
+                                        <label for="totalTraveler">Total Traveler</label>
+                                        <input type="number" required="true" name="totalTraveler" id="total" min="1" value="1"/>
+                                    </div>
+                                </div>
+
+
+                                <div class="row triplets">
+                                    <div class="f-item">
+                                        <label for="fullname1">Full Name</label>
+                                        <input type="text" id="fullname" class="fullname" name="fullname1">
+                                    </div>
+                                    <div class="f-item last">
+                                        <label>Gender</label>
+                                            <div class="selector" id="uniform-undefined">
+                                                <select style="opacity: 0;" name="gender1" id="gender" class="gender">
+                                                    <option value="male">Male</option>
+                                                    <option value="femall">Female</option>
+                                                </select>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="f-item last">
+                                        <label>Traveler Type</label>
+                                        <div class="selector" id="uniform-undefined">
+                                            <select style="opacity: 0;" name="type1" id="type" class="type">
+                                                <option value="adults">Adults</option>
+                                                <option value="child">Child</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="f-item">
+                                        <label>Passport</label>
+                                        <input name="passport1" type="number" required="true" id="passport" class="passport" />
+                                    </div>
+                                </div>
+
                                 <input type="submit" class="gradient-button" value="Proceed to next step" id="next-step">
                             </fieldset>
                         </form>
@@ -255,31 +295,6 @@
                 </section>
             </div>
         </footer>
-        <div class="lightbox" id="loginform">
-            <div class="lb-wrap">
-                <a href="#" class="close">x</a>
-                <div class="lb-content">
-                    <form>
-                        <h1>Log in</h1>
-                        <div class="f-item">
-                            <label for="email">E-mail address</label>
-                            <input type="email" id="email" name="email" />
-                        </div>
-                        <div class="f-item">
-                            <label for="password">Password</label>
-                            <input type="password" id="password" name="password" />
-                        </div>
-                        <div class="f-item checkbox">
-                            <input type="checkbox" id="remember_me" name="checkbox" />
-                            <label for="remember_me">Remember me next time</label>
-                        </div>
-                        <p><a href="#" title="Forgot password?">Forgot password?</a><br />
-                            Dont have an account yet? <a href="register.jsp" title="Sign up">Sign up.</a></p>
-                        <input type="submit" id="login" name="login" value="login" class="gradient-button"/>
-                    </form>
-                </div>
-            </div>
-        </div>
         <script>
             // Initiate selectnav function
             selectnav();
