@@ -11,5 +11,7 @@ package model;
  * @author Khachuong
  */
 public class CarManagement {
-    
+    public void getCarByID(int ID){
+        
+    }
 }
