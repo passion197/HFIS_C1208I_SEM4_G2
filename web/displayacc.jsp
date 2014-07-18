@@ -21,6 +21,7 @@
                         if (user != null) {
                             out.print("<li>Hello " + user + "!</li>");
                             out.print("<li><a href='logout'>LOGOUT</a></li>");
+                            out.print("<li><a href='OrderTourInfor' title='Order'>Your Booking</a></li>");
                         }
                     } else {
                         out.print("<li><a href='#' id='logins' title='Login' onclick='showLogin()'>Login</a></li>");
@@ -28,7 +29,6 @@
 
                 %>
 
-            <li><a href="my_account.html" title="Settings">Settings</a></li>
         </ul>
         <ul class="lang-nav">
             <li class="active"><a href="#" title="English (US)">English (US)</a></li>

@@ -4,7 +4,9 @@
 
 <struts>
     <!-- Configuration for the default package. -->
+  
     <package name="default" extends="struts-default">
+        
         <action name="EWindex" class="controler.EWindex">
             <result name="success">index.jsp</result>
         </action>
@@ -30,6 +32,21 @@
         </action>
         <action name="bookingstep1" class="controler.BookingStep1">
             <result name="success">bookingstep1.jsp</result>
+        </action>
+        <action name="bookingstep1handler" class="controler.BookingStep1Handler">
+            <result name="success">bookingstep2.jsp</result>
+        </action>
+        <action name="bookingstep2handler" class="controler.BookingStep2Handler">
+            <result name="success">bookingstep3.jsp</result>
+        </action>
+        <action name="bookingstep2handlerdir" class="controler.BookingStep2HandlerDir">
+            <result name="success" type="redirect">OrderTourInfor</result>
+        </action>
+        <action name="OrderTourInfor" class="controler.OrderTourInfor">
+            <result name="success">infoTourOrder.jsp</result>
+        </action>
+        <action name="search" class="controler.Search">
+            <result name="success">searchTour.jsp</result>
         </action>
     </package>
 </struts>

@@ -1,11 +1,12 @@
 <%-- 
-    Document   : bookingstep1
-    Created on : Jul 9, 2014, 1:53:53 PM
+    Document   : bookingstep2
+    Created on : Jul 17, 2014, 10:17:42 AM
     Author     : Doll
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -22,22 +23,6 @@
         <script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
         <script type="text/javascript" src="js/selectnav.js"></script>
         <script type="text/javascript" src="js/scripts.js"></script>
-        <script>
-            $(document).ready(function() {
-                $("#total").change(function() {
-                    var num = $(this).val();
-                    var current = $(".fullname").length;
-                    if (num >= current) {
-                        for (i = current + 1; i <= num; i++) {
-                            $("#fullname").after("<p></p><input type='text' class='fullname' name='fullname" + i + "'></input>");
-                            $("#gender").after("<p></p><div class='selector' id='uniform-undefined'><select name='gender"+i+"' id='gender' class='gender'><option value='male'>Male</option><option value='female'>Female</option></select></div>");
-                            $("#type").after("<p></p><div class='selector' id='uniform-undefined'><select name='type"+i+"' id='type' class='type'><option value='adults'>Adults</option><option value='child'>Child</option></select></div>");
-                            $("#passport").after("<p></p> <input name='passport"+i+"' class='' id='' type='number' required='true' />");
-                        }
-                    }
-                });
-            });
-        </script>
     </head>
     <body>
         <!--header-->
@@ -81,112 +66,81 @@
                         </ul>
                         <!--//crumbs-->
                     </nav>
-                    <!--//breadcrumbs-->
 
-                    <!--three-fourth content-->
 
                     <section class="three-fourth">
-                        <form id="booking" method="get" action="bookingstep1handler" class="booking">
+                        <form id="booking" method="get" action="#" class="booking">
                             <fieldset>
-                                <h3>Step <span style="margin-right: 25%">01/03 </span> Traveller info</h3>
+                                <h3>Step <span style="margin-right: 25%">02/03 </span> Confirm info</h3>
                                 <div class="row twins">
-                                    <s:iterator value="listTour" var="a">
+
+                                    <s:iterator value="listTourBook">
                                         <div class="f-item">
-                                            <label>Tour Name: <span style="font-size: 14px;font-weight: bold"><s:property value="tourName" /></span></label>
-                                            <label>Tour Depart: <span style="font-size: 14px;font-weight: bold"><s:property value="tourDepart" /></span></label>
-                                            <label>Tour Duration: <span style="font-size: 14px;font-weight: bold"><s:property value="Dates" /></span></label>
-                                            <label>Seat Available: <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="seatAvailable" /></span></label>
-                                            <label>Price Adults: <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="costAdults" /> $</span></label>
-                                            <label>Price Child: <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="costChild" /> $</span></label>
+                                            <label>Total Cost Tour Booking: <span style="font-size: 14px;font-weight: bold; color: red"><s:property value="totalCost" /> $</span></label>
+                                            <label>Booking Time: <span style="font-size: 14px;font-weight: bold;"><s:property value="dateorder" /></span></label>
+                                            <label>Full Name: <span style="font-size: 14px;font-weight: bold;"><s:property value="firstName" /> <s:property value="lastName" /></span></label>
+                                            <label>Telephone: <span style="font-size: 14px;font-weight: bold; color: blue"><s:property value="tel" /></span></label>
+                                            <label>Email: <span style="font-size: 14px;font-weight: bold; color: blue"><s:property value="email" /></span></label>
+                                            <label>Address: <span style="font-size: 14px;font-weight: bold;"><s:property value="address" /></span></label>
                                             <p></p>
-                                            <input type="hidden" name="tourId" value="<s:property value="tourID" />" />
-                                            <input type="hidden" name="tourSeat" value="<s:property value="seatAvailable" />" />
-                                            <input type="hidden" name="tourAdults" value="<s:property value="costAdults" />" />
-                                            <input type="hidden" name="tourChild" value="<s:property value="costChild" />" />
-                                            
                                         </div>
-                                        <figure style="float: right"><img style="width: 300px;height: 150px" src="images/uploads/<s:property value="img" />" /></figure> 
+                                        <div style="font-size: 13px;margin-left: 14%;width: 100%;float: left">
+                                            <span>Total Traveler: <b><s:property value="totalTraveler" /></b></span>
+                                            <span style="margin-left: 23%"> Adults: <b><s:property value="amountAdults" /></b></span>
+                                            <span style="margin-left: 23%"> Children: <b><s:property value="amountChild" /></b></span>
+                                            <br/>
+                                            <p></p>
+                                            <p></p>
+                                        </div>
+
                                     </s:iterator>
-                                </div>
-                                <s:iterator value="listUserInfo" var="b">
-
-                                    <h3>You can edit your information to true</h3>
-                                    <div class="row twins">
-                                        <div class="f-item active">
-                                            <label for="first_name">First name</label>
-                                            <input type="text" id="first_name" name="first_name" value="<s:property value="firstName" />" required="true" maxlength="20"/>
+                                    <h3>List of Traveler Tour</h3>
+                                    <div style="width: 100%;float: left;font-size: 13px;font-weight: bold;margin-left: 10%">
+                                        <div style="width: 20%;float: left">
+                                            <label>Full Name</label>
                                         </div>
-                                        <div class="f-item last">
-                                            <label for="last_name">Last name</label>
-                                            <input type="text" id="last_name" name="last_name" value="<s:property value="lastName" />" required="true" maxlength="20" />
+                                        <div style="width: 20%;float:left">
+                                            <label>Gender</label>
                                         </div>
-                                    </div>
-
-                                    <div class="row twins">
-                                        <div class="f-item">
-                                            <label for="tel">Telephone</label>
-                                            <input type="text" id="tel" name="tel" value="<s:property value="tel" />" required="true" maxlength="15" />
+                                        <div style="width: 20%;float: left">
+                                            <label>Adults/Child</label>
                                         </div>
-                                        <div class="f-item">
-                                            <label for="email">Email address</label>
-                                            <input type="email" id="email" name="email" value="<s:property value="email" />" required="true" maxlength="50" />
-                                        </div>
-                                        <span class="info">You’ll receive a confirmation email</span>
-                                    </div>
-
-                                    <div class="row twins">
-                                        <div class="f-item">
-                                            <label for="address">Address</label>
-                                            <input type="text" id="address" name="address" value="<s:property value="address" />" required="true" maxlength="100" />
+                                        <div style="width: 20%;float: left">
+                                            <label>Passport</label>
                                         </div>
                                     </div>
-                                </s:iterator>
-                                <h3>List of Traveler in the Tour</h3>
-                                <div class="row twins">
-                                    <div class="f-item">
-                                        <label for="totalTraveler">Total Traveler</label>
-                                        <input type="number" required="true" name="totalTraveler" id="total" min="1" value="1"/>
-                                    </div>
-                                </div>
-
-
-                                <div class="row triplets">
-                                    <div class="f-item">
-                                        <label for="fullname1">Full Name</label>
-                                        <input type="text" id="fullname" class="fullname" name="fullname1">
-                                    </div>
-                                    <div class="f-item last">
-                                        <label>Gender</label>
-                                            <div class="selector" id="uniform-undefined">
-                                                <select style="opacity: 0;" name="gender1" id="gender" class="gender">
-                                                    <option value="male">Male</option>
-                                                    <option value="femall">Female</option>
-                                                </select>
+                                    <s:iterator value="listInfo">
+                                        <hr>
+                                        <div style="width: 100%;float: left;font-size: 12px;margin-left: 10%">
+                                            <div style="width: 20%;float: left">
+                                                <label><s:property value="travelerName" /></label>
                                             </div>
-                                        
-                                    </div>
-                                    <div class="f-item last">
-                                        <label>Traveler Type</label>
-                                        <div class="selector" id="uniform-undefined">
-                                            <select style="opacity: 0;" name="type1" id="type" class="type">
-                                                <option value="adults">Adults</option>
-                                                <option value="child">Child</option>
-                                            </select>
+                                            <div style="width: 20%;float:left">
+                                                <label><s:property value="travelerGender" /></label>
+                                            </div>
+                                            <div style="width: 20%;float: left">
+                                                <label><s:property value="travelerType" /></label>
+                                            </div>
+                                            <div style="width: 20%;float: left">
+                                                <label><s:property value="travelerPassport" /></label>
+                                            </div>
                                         </div>
+                                    </s:iterator>   
+                                    <hr>
+                                    <div style="margin-top: 50px;">
+                                        <h3>Forms of Payment</h3>
                                     </div>
-                                    <div class="f-item">
-                                        <label>Passport</label>
-                                        <input name="passport1" type="number" required="true" id="passport" class="passport" />
+                                    <div style="margin-left: 35%">
+                                        <a href="bookingstep2handlerdir" class="gradient-button">Pay Directly</a>
+                                        <a href="bookingstep2handler" class="gradient-button">Pay Online</a>
+                                        <a href="bookingstep1?tourID=<s:property value="tourId" />" class="gradient-button" style="margin-left: 10%">Cancel</a>
                                     </div>
                                 </div>
-
-                                <input type="submit" class="gradient-button" value="Proceed to next step" id="next-step">
                             </fieldset>
                         </form>
                     </section>
-                    <!--//three-fourth content-->
 
-                    <!--right sidebar-->
+                    <!--//breadcrumbs-->
                     <aside class="right-sidebar">
                         <!--Booking details-->
                         <article class="booking-details clearfix" style="display: none">
@@ -304,7 +258,5 @@
             // Initiate selectnav function
             selectnav();
         </script>
-    </body>
-
-
+    </body>     
 </html>
