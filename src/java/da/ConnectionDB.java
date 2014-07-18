@@ -23,7 +23,7 @@ public class ConnectionDB {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:56190;databaseName=East2West";
-            System.out.println("sss");
+            System.out.println("ssshhh");
             con = DriverManager.getConnection(url, "sa", "123456");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
