@@ -21,6 +21,7 @@ public class ConnectionDB {
 
     public static Connection getConnection() {
         try {
+            System.out.println("Check in out");
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:56190;databaseName=East2West";
             System.out.println("ssshhh");
