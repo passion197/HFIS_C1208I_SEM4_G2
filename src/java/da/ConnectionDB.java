@@ -18,10 +18,10 @@ import java.util.logging.Logger;
 public class ConnectionDB {
 
     private static Connection con;
-
+    
     public static Connection getConnection() {
         try {
-            System.out.println("Check in out");
+            System.out.println("Check in out adasd");
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:56190;databaseName=East2West";
             System.out.println("ssshhh");
