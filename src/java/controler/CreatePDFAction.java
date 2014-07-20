@@ -28,14 +28,22 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
+
 
 /**
  *
  * @author Kha Chuong
  */
 public class CreatePDFAction extends ActionSupport {
-    
-    private static String FILE = "C:\\Documents and Settings\\Kha Chuong\\Desktop\\HFIS_C1208I_SEM4_G2\\first.pdf";
+   //C:\\Documents and Settings\\Kha Chuong\\Desktop\\HFIS_C1208I_SEM4_G2\\ 
+    private static String FILE = "C:\\Documents and Settings\\Kha Chuong\\Desktop\\HFIS_C1208I_SEM4_G2\\order.pdf";
   private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
       Font.BOLD);
   private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,
@@ -54,11 +62,98 @@ public class CreatePDFAction extends ActionSupport {
       addTitlePage(document);
       addContent(document);
       document.close();
+      
+        String host = "smtp.gmail.com";
+        String port = "587";
+        String mailFrom = "chuongit.nkc@gmail.com";
+        String password = "****vietnamtrongtoi????";
+ 
+        // message info
+        String mailTo = "khachuong.vn@gmail.com";
+        String subject = "Order status - East2West";
+        String message = "Dear, thank you for your ordering on East2West. You can download your own order in attach file. Have a great day!";
+ 
+        // attachments
+        String[] attachFiles = new String[1];
+        attachFiles[0] = "C:\\Documents and Settings\\Kha Chuong\\Desktop\\HFIS_C1208I_SEM4_G2\\order.pdf";
+
+ 
+        try {
+            sendEmailWithAttachments(host, port, mailFrom, password, mailTo,
+                subject, message, attachFiles);
+            System.out.println("Email sent.");
+        } catch (Exception ex) {
+            System.out.println("Could not send email.");
+            ex.printStackTrace();
+        }
     } catch (Exception e) {
       e.printStackTrace();
     }
         return SUCCESS;
     }
+    public static void sendEmailWithAttachments(String host, String port,
+            final String userName, final String password, String toAddress,
+            String subject, String message, String[] attachFiles)
+            throws AddressException, MessagingException {
+        // sets SMTP server properties
+        Properties properties = new Properties();
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", port);
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.user", userName);
+        properties.put("mail.password", password);
+ 
+        // creates a new session with an authenticator
+        Authenticator auth = new Authenticator() {
+            public PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(userName, password);
+            }
+        };
+        Session session = Session.getInstance(properties, auth);
+ 
+        // creates a new e-mail message
+        Message msg = new MimeMessage(session);
+ 
+        msg.setFrom(new InternetAddress(userName));
+        InternetAddress[] toAddresses = { new InternetAddress(toAddress) };
+        msg.setRecipients(Message.RecipientType.TO, toAddresses);
+        msg.setSubject(subject);
+        msg.setSentDate(new Date());
+ 
+        // creates message part
+        MimeBodyPart messageBodyPart = new MimeBodyPart();
+        messageBodyPart.setContent(message, "text/html");
+ 
+        // creates multi-part
+        Multipart multipart = new MimeMultipart();
+        multipart.addBodyPart(messageBodyPart);
+ 
+        // adds attachments
+        if (attachFiles != null && attachFiles.length > 0) {
+            for (String filePath : attachFiles) {
+                MimeBodyPart attachPart = new MimeBodyPart();
+ 
+                try {
+                    attachPart.attachFile(filePath);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+ 
+                multipart.addBodyPart(attachPart);
+            }
+        }
+ 
+        // sets the multi-part as e-mail's content
+        msg.setContent(multipart);
+ 
+        // sends the e-mail
+        Transport.send(msg);
+ 
+    }
+    
+    
+    
     private static void addMetaData(Document document) {
     document.addTitle("My first PDF");
     document.addSubject("Using iText");
@@ -73,20 +168,15 @@ public class CreatePDFAction extends ActionSupport {
     // We add one empty line
     addEmptyLine(preface, 1);
     // Lets write a big header
-    preface.add(new Paragraph("Title of the document", catFont));
+    preface.add(new Paragraph("Order on East2West", catFont));
 
     addEmptyLine(preface, 1);
     // Will create: Report generated by: _name, _date
-    preface.add(new Paragraph("Report generated by: " + System.getProperty("user.name") + ", " + new Date(), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+    preface.add(new Paragraph("Report generated by East2West's System at, " + new Date(), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         smallBold));
-    addEmptyLine(preface, 3);
-    preface.add(new Paragraph("This document describes something which is very important ",
+    addEmptyLine(preface, 2);
+    preface.add(new Paragraph("First of all we want to say thank you for your ordering on East2West, we hope you'll enjoy with our services!",
         smallBold));
-
-    addEmptyLine(preface, 8);
-
-    preface.add(new Paragraph("This document is a preliminary version and not subject to your license agreement or any other agreement with vogella.com ;-).",
-        redFont));
 
     document.add(preface);
     // Start a new page
