@@ -31,5 +31,8 @@
         <action name="bookingstep1" class="controler.BookingStep1">
             <result name="success">bookingstep1.jsp</result>
         </action>
+      <action name="create" class="controler.CreatePDFAction">
+            <result name="success">index.jsp</result>
+        </action>
     </package>
 </struts>
