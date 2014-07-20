@@ -34,5 +34,8 @@
       <action name="create" class="controler.CreatePDFAction">
             <result name="success">index.jsp</result>
         </action>
+        <action name="rentCar" class="controler.RentCarAction">
+            <result name="success">rentACar.jsp</result>
+        </action>
     </package>
 </struts>
