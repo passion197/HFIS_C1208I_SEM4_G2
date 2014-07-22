@@ -21,6 +21,7 @@ public class Car {
     private double CostAvailableDriver;
     private String img;
     private String carName;
+    private String paypal;
 
     public String getCarID() {
         return carID;
@@ -100,6 +101,14 @@ public class Car {
 
     public void setCarName(String carName) {
         this.carName = carName;
+    }
+
+    public String getPaypal() {
+        return paypal;
+    }
+
+    public void setPaypal(String paypal) {
+        this.paypal = paypal;
     }
     
     

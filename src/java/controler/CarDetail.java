@@ -60,6 +60,7 @@ public class CarDetail extends ActionSupport {
             c.setCostNotDriver(rs.getDouble("CostNotDriver"));
             c.setImg(rs.getString("images"));
             c.setCarName(rs.getString("CarName"));
+            c.setPaypal(rs.getString("Paypal"));
             listCar.add(c);
         }
         return SUCCESS;

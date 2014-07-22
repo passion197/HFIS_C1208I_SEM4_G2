@@ -87,25 +87,6 @@
                     <section class="three-fourth">
                         <form id="booking" method="get" action="create" class="booking">
                             <fieldset>
-                              <h3>Car Information</h3>
-                                <div class="row twins">
-                          
-                                        
-                                        
-                                        <div class="f-item">
-                                            <label>Car Name: <span style="font-size: 14px;font-weight: bold"><s:property value="selectedCar.carName" /></span></label>
-              
-                                            <label>Number of seats: <span style="font-size: 14px;font-weight: bold"><s:property value="selectedCar.Seat" /></span></label>
-                                            <label>Quantity available <span style="font-size: 14px;font-weight: bold"><s:property value="selectedCar.QuantityAvailable" /></span></label>
-                                            <label>Have air condition?: <span style="font-size: 14px;font-weight: bold"><s:property value="" /> No</span></label>
-                                            <label>Cost non-driver/day <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="selectedCar.CostNotDriver" /> $</span></label>
-                                            <label>Cost have driver/day <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="selectedCar.CostAvailableDriver" /> $</span></label>
-                                            <p></p>
-                                         
-                                        </div>
-                                        <figure style="float: right"><img style="width: 300px;height: 150px" src="images/uploads/<s:property value="selectedCar.img" />" /></figure> 
-
-                                </div>
                                 <h3>Personal Information</h3>
                                 <div class="row twins">
                                     <div class="f-item active">
@@ -136,10 +117,42 @@
                                         <input type="text" id="address" name="address" value="<s:property value="address" />" required="true" maxlength="100" />
                                     </div>
                                 </div>
-                                <input type="submit" class="gradient-button" value="Order Now" id="next-step">
+                               <h3>Car Information</h3>
+                                <div class="row twins">
+                          
+                                        
+                                        
+                                        <div class="f-item">
+                                            <label>Car Name: <span style="font-size: 14px;font-weight: bold"><s:property value="selectedCar.carName" /></span></label>
+              
+                                            <label>Number of seats: <span style="font-size: 14px;font-weight: bold"><s:property value="selectedCar.Seat" /></span></label>
+                                            <label>Quantity available <span style="font-size: 14px;font-weight: bold"><s:property value="selectedCar.QuantityAvailable" /></span></label>
+                                            <label>Have air condition?: <span style="font-size: 14px;font-weight: bold"><s:property value="" /> No</span></label>
+                                            <label>Cost non-driver/day <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="selectedCar.CostNotDriver" /> $</span></label>
+                                            <label>Cost have driver/day <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="selectedCar.CostAvailableDriver" /> $</span></label>
+                                            <p></p>
+                                         
+                                        </div>
+                                        <figure style="float: right"><img style="width: 300px;height: 150px" src="images/uploads/<s:property value="selectedCar.img" />" /></figure> 
+
+                                </div> 
+                                <input type="submit" class="gradient-button" value="Pay Directly" id="next-step">
                             </fieldset>
+ 
                         </form>
+                          <div class="row twins" style="background-color: #ffffff;">
+                                        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="<s:property value="selectedCar.Paypal"/>">
+<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+                                    </div>           
                     </section>
+                                     
+                                    
+                               
+                                    
                     <!--//three-fourth content-->
 
                     <!--right sidebar-->

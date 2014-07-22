@@ -126,6 +126,8 @@
                                         <p>American Express, Visa, Euro/Mastercard, Diners Club<br></p>
                                     </div>
                                     <center><a href="rentCar?&carID=<s:property value="carID"/>" title="Order Tour" class="gradient-button">BOOKING NOW</a></center>
+                                    
+
                                 </article>
                             </section>
                             <!--//description-->

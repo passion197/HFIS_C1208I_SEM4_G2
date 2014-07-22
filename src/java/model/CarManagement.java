@@ -38,6 +38,7 @@ public class CarManagement {
                 c.setCostNotDriver(rs.getDouble("CostNotDriver"));
                 c.setImg(rs.getString("images"));
                 c.setCarName(rs.getString("CarName"));
+                c.setPaypal(rs.getString("Paypal"));
                 return c;
             }
         } catch (SQLException ex) {
