@@ -104,6 +104,8 @@
                                 <div class="datepicker-wrap"><input type="text" placeholder="" id="datepicker4" name="datepicker4" /></div>
                             </div>
                             <div class="f-item datepicker">
+                               
+                                
                                 <label for="datepicker2">Check-out date</label>
                                 <div class="datepicker-wrap"><input type="text" placeholder="" id="datepicker5" name="datepicker5" /></div>
                             </div>

@@ -9,11 +9,9 @@ package controler;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import entity.CarBooking;
-import entity.OfficeAddress;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import model.Car;
 import model.CarManagement;
 
@@ -21,11 +19,9 @@ import model.CarManagement;
  *
  * @author Kha Chuong
  */
-public class RentCarAction extends ActionSupport  {
-    public String carID;
+public class RentCarNextStep extends ActionSupport {
     public Car selectedCar;
-    public List<OfficeAddress> listOffices;
-    
+    public String carID;
     public String fullName;
     public String phone;
     public String address;
@@ -40,65 +36,46 @@ public class RentCarAction extends ActionSupport  {
     public String haveLicense;
     public String haveDriver;
     public CarBooking currentCarBooking;
-     @Override
-    public String execute() throws Exception {
-         CarManagement mn = new CarManagement();
-         listOffices = mn.getAllOficeAddress();
+    @Override
+    public  String execute() throws Exception{
+        CarManagement mn = new CarManagement();
          selectedCar = mn.getCarByID(carID);
-//         currentCarBooking = new CarBooking();
-//         currentCarBooking.setCarID(Integer.parseInt(carID));
-//        // String userID =  ActionContext.getContext().getSession().get("userID").toString();
-//         currentCarBooking.setUserID(1);
-//         currentCarBooking.setPickupAt(mn.getOfficeAddressID(pickupIn));
-//         currentCarBooking.setDropoffAt(mn.getOfficeAddressID(dropoffIn));
-//         currentCarBooking.setFullName(fullName);
-//         currentCarBooking.setAddress(address);
-//         currentCarBooking.setPhone(phone);
-//         currentCarBooking.setEmail(email);
-//         DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
-//         Date date = new Date();
-//         currentCarBooking.setDateOrder(dateFormat.format(date));
-//       
-//         currentCarBooking.setPickupDate(pickupDate);
-//         currentCarBooking.setPickupTime(pickupTime);
-//         currentCarBooking.setDropoffDate(dropoffDate);
-//         currentCarBooking.setDropoffTime(dropoffTime);
-//         currentCarBooking.setHirerAge(age);
-//         currentCarBooking.setHaveLicense(haveLicense);
-//         if("Yes".equals(haveDriver)){
-//             currentCarBooking.setTotalAmount(selectedCar.getCostAvailableDriver());
-//         }else{
-//             currentCarBooking.setTotalAmount(selectedCar.getCostNotDriver());
-//         }
-//         currentCarBooking.setOrderStatus("Pending");
-//        ActionContext.getContext().getSession().put("currentCarBooking", currentCarBooking);
-//        mn.addNewCarOrder(currentCarBooking);
-//         System.out.println("haha I did it");
-        return SUCCESS;
-    }
-
+         currentCarBooking = new CarBooking();
+         currentCarBooking.setCarID(Integer.parseInt(carID));
+        // String userID =  ActionContext.getContext().getSession().get("userID").toString();
+         currentCarBooking.setUserID(1);
+         currentCarBooking.setPickupAt(mn.getOfficeAddressID(pickupIn));
+         currentCarBooking.setDropoffAt(mn.getOfficeAddressID(dropoffIn));
+         currentCarBooking.setFullName(fullName);
+         currentCarBooking.setAddress(address);
+         currentCarBooking.setPhone(phone);
+         currentCarBooking.setEmail(email);
+         DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY hh:mm:ss" );
+         Date date = new Date();
+         currentCarBooking.setDateOrder(dateFormat.format(date));
+       
+         currentCarBooking.setPickupDate(pickupDate);
+         currentCarBooking.setPickupTime(pickupTime);
+         currentCarBooking.setDropoffDate(dropoffDate);
+         currentCarBooking.setDropoffTime(dropoffTime);
+         currentCarBooking.setHirerAge(age);
+         currentCarBooking.setHaveLicense(haveLicense);
+         if("Yes".equals(haveDriver)){
+             currentCarBooking.setTotalAmount(selectedCar.getCostAvailableDriver());
+         }else{
+             currentCarBooking.setTotalAmount(selectedCar.getCostNotDriver());
+         }
+         currentCarBooking.setOrderStatus("Pending");
+        ActionContext.getContext().getSession().put("currentCarBooking", currentCarBooking);
+        mn.addNewCarOrder(currentCarBooking);
+         return SUCCESS;
+}
     public String getCarID() {
         return carID;
     }
 
     public void setCarID(String carID) {
         this.carID = carID;
-    }
-
-    public Car getSelectedCar() {
-        return selectedCar;
-    }
-
-    public void setSelectedCar(Car selectedCar) {
-        this.selectedCar = selectedCar;
-    }
-
-    public List<OfficeAddress> getListOffices() {
-        return listOffices;
-    }
-
-    public void setListOffices(List<OfficeAddress> listOffices) {
-        this.listOffices = listOffices;
     }
 
     public String getFullName() {
@@ -212,6 +189,7 @@ public class RentCarAction extends ActionSupport  {
     public void setCurrentCarBooking(CarBooking currentCarBooking) {
         this.currentCarBooking = currentCarBooking;
     }
+    
     
     
 }

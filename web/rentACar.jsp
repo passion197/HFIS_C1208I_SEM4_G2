@@ -32,7 +32,7 @@
                             $("#fullname").after("<p></p><input type='text' class='fullname' name='fullname" + i + "'></input>");
                             $("#gender").after("<p></p><div class='selector' id='uniform-undefined'><select name='gender" + i + "' id='gender' class='gender'><option value='male'>Male</option><option value='female'>Female</option></select></div>");
                             $("#type").after("<p></p><div class='selector' id='uniform-undefined'><select name='type" + i + "' id='type' class='type'><option value='adults'>Adults</option><option value='child'>Child</option></select></div>");
-                               }
+                        }
                     }
                 });
             });
@@ -85,24 +85,34 @@
                     <!--three-fourth content-->
 
                     <section class="three-fourth">
-                        <form id="booking" method="get" action="create" class="booking">
+                        <form id="booking" method="get" action="rentNextStep" class="booking">
                             <fieldset>
-                                <h3>Personal Information</h3>
-                                <div class="row twins">
-                                    <div class="f-item active">
-                                        <label for="first_name">First name</label>
-                                        <input type="text" id="first_name" name="first_name" value="<s:property value="firstName" />" required="true" maxlength="20"/>
-                                    </div>
-                                    <div class="f-item last">
-                                        <label for="last_name">Last name</label>
-                                        <input type="text" id="last_name" name="last_name" value="<s:property value="lastName" />" required="true" maxlength="20" />
-                                    </div>
-                                </div>
-
+                                <h3>Car Information</h3>
                                 <div class="row twins">
                                     <div class="f-item">
+                                        <label>Car Name: <span style="font-size: 14px;font-weight: bold"><s:property value="selectedCar.carName" /></span></label>
+
+                                        <label>Number of seats: <span style="font-size: 14px;font-weight: bold"><s:property value="selectedCar.Seat" /></span></label>
+                                        <label>Quantity available <span style="font-size: 14px;font-weight: bold"><s:property value="selectedCar.QuantityAvailable" /></span></label>
+                                        <label>Cost non-driver/day <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="selectedCar.CostNotDriver" /> $</span></label>
+                                        <label>Cost have driver/day <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="selectedCar.CostAvailableDriver" /> $</span></label>
+                                        <p></p>
+                                        <input type="text" hidden="YES" value="<s:property value="selectedCar.carID" />" name="carID"/>
+                                    </div>
+                                    <figure style="float: right"><img style="width: 300px;height: 150px" src="images/uploads/<s:property value="selectedCar.img" />" /></figure> 
+
+                                </div> 
+                                <h3>Personal Information</h3>
+
+
+                                <div class="row twins">
+                                    <div class="f-item ">
+                                        <label for="first_name">Full name</label>
+                                        <input type="text" id="first_name" name="fullName" value="<s:property value="firstName" />" required="true" maxlength="20"/>
+                                    </div>
+                                    <div class="f-item">
                                         <label for="tel">Telephone</label>
-                                        <input type="text" id="tel" name="tel" value="<s:property value="tel" />" required="true" maxlength="15" />
+                                        <input type="text" id="tel" name="phone" value="<s:property value="tel" />" required="true" maxlength="15" />
                                     </div>
                                     <div class="f-item">
                                         <label for="email">Email address</label>
@@ -117,86 +127,142 @@
                                         <input type="text" id="address" name="address" value="<s:property value="address" />" required="true" maxlength="100" />
                                     </div>
                                 </div>
-                               <h3>Car Information</h3>
+                                <h3>Order Information</h3>
                                 <div class="row twins">
-                          
-                                        
-                                        
-                                        <div class="f-item">
-                                            <label>Car Name: <span style="font-size: 14px;font-weight: bold"><s:property value="selectedCar.carName" /></span></label>
-              
-                                            <label>Number of seats: <span style="font-size: 14px;font-weight: bold"><s:property value="selectedCar.Seat" /></span></label>
-                                            <label>Quantity available <span style="font-size: 14px;font-weight: bold"><s:property value="selectedCar.QuantityAvailable" /></span></label>
-                                            <label>Have air condition?: <span style="font-size: 14px;font-weight: bold"><s:property value="" /> No</span></label>
-                                            <label>Cost non-driver/day <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="selectedCar.CostNotDriver" /> $</span></label>
-                                            <label>Cost have driver/day <span style="font-size: 14px;font-weight: bold;color: red"><s:property value="selectedCar.CostAvailableDriver" /> $</span></label>
-                                            <p></p>
-                                         
-                                        </div>
-                                        <figure style="float: right"><img style="width: 300px;height: 150px" src="images/uploads/<s:property value="selectedCar.img" />" /></figure> 
+                                    <div class="f-item">
+                                        <label for="destination7">Pick Up Car in</label>
 
-                                </div> 
-                                <input type="submit" class="gradient-button" value="Pay Directly" id="next-step">
+                                        <select name="pickupIn">
+                                            <s:iterator value="listOffices" var="it">
+                                                <option><s:property value="#it.OfficeAddress"/></option>
+                                            </s:iterator>
+
+                                        </select>
+
+                                    </div>
+                                    <div class="f-item">
+                                        <label for="destination8">Drop Off Car in</label>
+                                        <select name="dropoffIn">
+
+                                            <s:iterator value="listOffices" var="it">
+                                                <option><s:property value="#it.OfficeAddress"/></option>
+                                            </s:iterator>
+
+
+                                        </select>
+
+                                    </div>
+                                    <div class="f-item">
+                                        <label for="datepicker11">Pick up time</label>
+                                        <div class="datepicker-wrap"><input type="text" placeholder="" id="datepicker11" name="pickupDate" /></div>
+
+                                    </div>
+
+                                    <div class="f-item">
+                                        <label for="datepicker11">At what time?</label>
+                                        <select name="pickupTime">
+                                            <option>00:00</option>
+                                            <option>01:00</option>
+                                            <option>02:00</option>
+                                            <option>03:00</option>
+                                            <option>04:00</option>
+                                            <option>05:00</option>
+                                            <option>06:00</option>
+                                            <option>07:00</option>
+                                            <option>08:00</option>
+                                            <option>09:00</option>
+                                            <option>10:00</option>
+                                            <option>11:00</option>
+                                            <option>12:00</option>
+                                            <option  selected="selected">13:00</option>
+                                            <option>14:00</option>
+                                            <option>15:00</option>
+                                            <option>16:00</option>
+                                            <option>17:00</option>
+                                            <option>18:00</option>
+                                            <option>19:00</option>
+                                            <option>20:00</option>
+                                            <option>21:00</option>
+                                            <option>22:00</option>
+                                            <option>23:00</option>
+                                        </select>
+                                    </div>
+                                    <div class="f-item datepicker">
+                                        <label for="datepicker12">Drop of time</label>
+                                        <div class="datepicker-wrap"><input type="text" placeholder="" id="datepicker12" name="dropoffDate" /></div>
+
+                                    </div>
+                                    <div class="f-item">
+                                        <label for="datepicker11">At what time?</label>
+                                        <select name="dropoffTime">
+                                            <option>00:00</option>
+                                            <option>01:00</option>
+                                            <option>02:00</option>
+                                            <option>03:00</option>
+                                            <option>04:00</option>
+                                            <option>05:00</option>
+                                            <option>06:00</option>
+                                            <option>07:00</option>
+                                            <option>08:00</option>
+                                            <option>09:00</option>
+                                            <option selected="selected">10:00</option>
+                                            <option>11:00</option>
+                                            <option>12:00</option>
+                                            <option>13:00</option>
+                                            <option>14:00</option>
+                                            <option>15:00</option>
+                                            <option>16:00</option>
+                                            <option>17:00</option>
+                                            <option>18:00</option>
+                                            <option>19:00</option>
+                                            <option>20:00</option>
+                                            <option>21:00</option>
+                                            <option>22:00</option>
+                                            <option>23:00</option>
+                                        </select>
+                                    </div>
+                                    <div class="f-item">
+                                        <label for="datepicker11">How old are you?</label>
+                                        <input type="text" placeholder="Enter your age here" id="destination7" name="age" />
+                                    </div>
+                                    <div class="f-item">
+                                        <label for="datepicker11">Do you have Driver License?</label>
+                                        <select name="haveLicense">
+                                            <option selected="selected">Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="f-item">
+                                        <label for="datepicker11">Do you want to rent a car with driver?</label>
+                                        <select name="haveDriver">
+                                            <option selected="selected">Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!--//column-->
+
+                                <!--column-->
+
+                                <input type="submit" class="gradient-button" value="Rent Now" id="next-step">
+
+
+                                </div>
+
                             </fieldset>
- 
+
                         </form>
-                          <div class="row twins" style="background-color: #ffffff;">
-                                        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="<s:property value="selectedCar.Paypal"/>">
-<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-                                    </div>           
+                        <!--                        <div class="row twins" style="margin-top: -30px; margin-left: 150px; ">
+                                                    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                                        <input type="hidden" name="cmd" value="_s-xclick">
+                                                        <input type="hidden" name="hosted_button_id" value="<s:property value="selectedCar.Paypal"/>">
+                                                        <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                                                        <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                                                    </form>
+                                                </div>           -->
                     </section>
-                                     
-                                    
-                               
-                                    
-                    <!--//three-fourth content-->
-
-                    <!--right sidebar-->
-                    <aside class="right-sidebar">
-                        <!--Booking details-->
-                        <article class="booking-details clearfix" style="display: none">
-                            <h1>Best ipsum hotel 
-                                <span class="stars">
-                                    <img src="images/ico/star.png" alt="">
-                                    <img src="images/ico/star.png" alt="">
-                                    <img src="images/ico/star.png" alt="">
-                                    <img src="images/ico/star.png" alt="">
-                                </span>
-                            </h1>
-                            <span class="address">Marylebone, London</span>
-                            <span class="rating"> 8 /10</span>
-                            <div class="booking-info">
-                                <h6>Rooms</h6>
-                                <p>Standard twin room</p>
-                                <h6>Room Description</h6>
-                                <p>Room only</p>
-                                <h6>Check-in Date</h6>
-                                <p>14-11-12</p>
-                                <h6>Check-out Date</h6>
-                                <p>15-11-12</p>
-                                <h6>Room(s)</h6>
-                                <p>1 night, 1 room, max. 2 people. </p>
-                            </div>
-                            <div class="price">
-                                <p class="total">Total Price:  $ 55,00</p>
-                                <p>VAT (20%) included</p>
-                            </div>
-                        </article>
-                        <!--//Booking details-->
-
-                        <!--Need Help Booking?-->
-                        <article class="default clearfix">
-                            <h2>Need Help Booking?</h2>
-                            <p>Call our customer services team on the number below to speak to one of our advisors who will help you with all of your holiday needs.</p>
-                            <p class="number">1- 555 - 555 - 555</p>
-                        </article>
-                        <!--//Need Help Booking?-->
-                    </aside>
-                    <!--//right sidebar-->
                 </div>
                 <!--//main content-->
             </div>
