@@ -50,12 +50,13 @@ public class CarManagement {
         }
         return null;
     }
-    public void addNewCarOrder(CarBooking order){
+
+    public void addNewCarOrder(CarBooking order) {
         try {
             Connection con = da.ConnectionDB.getConnection();
-            String sql = "Insert into CarBooking values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "Insert into CarBooking values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement prst = con.prepareStatement(sql);
-        
+
             prst.setInt(1, order.getCarID());
             prst.setInt(2, order.getUserID());
             prst.setInt(3, order.getPickupAt());
@@ -73,13 +74,16 @@ public class CarManagement {
             prst.setString(15, order.getHaveLicense());
             prst.setDouble(16, order.getTotalAmount());
             prst.setString(17, order.getOrderStatus());
+            prst.setString(18, order.getPaymentStatus());
+            prst.setString(19, order.getDescription());
             prst.executeUpdate();
-                    
+
         } catch (SQLException ex) {
             Logger.getLogger(CarManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
+
     public List<OfficeAddress> getAllOficeAddress() {
         try {
             List<OfficeAddress> listTemp = new LinkedList<OfficeAddress>();
@@ -108,14 +112,56 @@ public class CarManagement {
             String sql = "Select * From OfficeAddress Where OfficeAddress = ?";
             PreparedStatement prst = con.prepareStatement(sql);
             prst.setString(1, address);
-            
+
             ResultSet rs = prst.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 return rs.getInt("OfficeAddressID");
             }
         } catch (SQLException ex) {
             Logger.getLogger(CarManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 1;
+    }
+
+    public boolean checkBookable(String pickupDate, String carID, int carAvailable, int totalCars) {
+        System.out.println("Pick up date " + pickupDate);
+        if (carAvailable > 0) {
+            return true;
+        } else {
+            try {
+                int counter = 0;
+                Connection con = da.ConnectionDB.getConnection();
+                String sql = "Select * From CarBooking Where CarID = ?";
+                PreparedStatement prst = con.prepareStatement(sql);
+                prst.setString(1, carID);
+                ResultSet rs = prst.executeQuery();
+                while (rs.next()) {
+
+                    if (pickupDate.compareTo(rs.getString("DropoffDate")) > 0 && rs.getString("OrderStatus").equalsIgnoreCase("waiting") && rs.getString("PaymentStatus").equalsIgnoreCase("pending")) {
+                        counter++;
+
+                    }
+                }
+                if (counter >= totalCars) {
+                    return false;
+                } else {
+                    String sql2 = "Select * From CarBooking Where CarID = ?";
+                    PreparedStatement prst2 = con.prepareStatement(sql2);
+                    prst2.setString(1, carID);
+                    ResultSet rs2 = prst2.executeQuery();
+                    while (rs2.next()) {
+                        if (rs2.getString("DropoffDate").compareTo(pickupDate) > 0 && rs.getString("PaymentStatus").equalsIgnoreCase("pending")) {
+
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(CarManagement.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
     }
 }

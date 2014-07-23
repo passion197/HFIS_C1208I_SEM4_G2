@@ -38,7 +38,7 @@
             <result name="success">rentACar.jsp</result>
         </action>
         <action name="rentNextStep" class="controler.RentCarNextStep">
-            <result name="success">index.jsp</result>
+            <result name="success">finalstep.jsp</result>
         </action>
 
     </package>

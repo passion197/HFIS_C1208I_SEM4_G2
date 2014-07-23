@@ -29,6 +29,8 @@ public class CarBooking {
     private String HaveLicense;
     private double TotalAmount;
     private String OrderStatus;
+    private String PaymentStatus;
+    private String Description;
 
     public int getOrderID() {
         return OrderID;
@@ -174,4 +176,21 @@ public class CarBooking {
     public void setOrderStatus(String OrderStatus) {
         this.OrderStatus = OrderStatus;
     }
+
+    public String getPaymentStatus() {
+        return PaymentStatus;
+    }
+
+    public void setPaymentStatus(String PaymentStatus) {
+        this.PaymentStatus = PaymentStatus;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String Description) {
+        this.Description = Description;
+    }
+    
 }
